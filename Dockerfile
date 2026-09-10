@@ -1,13 +1,15 @@
 FROM node:24-alpine AS build
 
+RUN corepack enable
+
 # Copy the source code
 COPY ./ /tmp/source_code
 
 # Install dependencies
-RUN cd /tmp/source_code && npm install --ignore-scripts
+RUN cd /tmp/source_code && pnpm install --frozen-lockfile --ignore-scripts
 
 # Build the source code
-RUN cd /tmp/source_code && npm run build
+RUN cd /tmp/source_code && pnpm build
 
 # create libraries directory
 RUN mkdir -p /libraries
@@ -16,7 +18,7 @@ RUN mkdir -p /libraries
 RUN cp -r /tmp/source_code/lib /libraries
 RUN cp -r /tmp/source_code/assets /libraries
 RUN cp /tmp/source_code/package.json /libraries
-RUN cp /tmp/source_code/package-lock.json /libraries
+RUN cp /tmp/source_code/pnpm-lock.yaml /libraries
 RUN cp /tmp/source_code/oclif.manifest.json /libraries
 
 # Copy the bin directory to the /libraries directory
@@ -27,6 +29,8 @@ RUN rm -rf /tmp/*
 
 FROM node:24-alpine
 
+RUN corepack enable
+
 # Set ARG to explicit value to build chosen version. Default is "latest"
 ARG ASYNCAPI_CLI_VERSION=
 
@@ -36,8 +40,8 @@ RUN addgroup -S myuser && adduser -S myuser -G myuser
 WORKDIR /app
 
 # Since 0.14.0 release of html-template chromium is needed for pdf generation
-ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 # Since 0.30.0 release Git is supported and required as a dependency
 # Since 0.14.0 release of html-template chromium is needed for pdf generation.
 # More custom packages for specific template should not be added to this dockerfile. Instead, we should come up with some extensibility solution.
@@ -50,7 +54,7 @@ RUN apk --update add git chromium && \
 COPY --from=build /libraries /libraries
 
 # Install the dependencies
-RUN cd /libraries && npm install --omit=dev --ignore-scripts
+RUN cd /libraries && pnpm install --prod --frozen-lockfile --ignore-scripts
 
 # Create a script that runs the desired command
 RUN ln -s /libraries/bin/run_bin /usr/local/bin/asyncapi

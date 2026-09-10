@@ -47,6 +47,9 @@ importers:
       '@asyncapi/raml-dt-schema-parser':
         specifier: ^4.0.24
         version: 4.0.24(encoding@0.1.13)
+      '@asyncapi/specs':
+        specifier: ^6.11.1
+        version: 6.11.1
       '@asyncapi/studio':
         specifier: ^1.2.0
         version: 1.2.0(@babel/core@7.12.9(supports-color@8.1.1))(@noble/hashes@1.8.0)(csstype@3.2.3)(encoding@0.1.13)(immer@9.0.21)(supports-color@8.1.1)(ts-node@10.9.2(@types/node@25.0.10)(typescript@5.9.3))
@@ -162,6 +165,9 @@ importers:
       '@asyncapi/newtemplate':
         specifier: ./test/fixtures/newtemplate
         version: link:test/fixtures/newtemplate
+      '@changesets/changelog-git':
+        specifier: 0.2.0
+        version: 0.2.0
       '@eslint/js':
         specifier: ^9.39.2
         version: 9.39.2
@@ -1145,6 +1151,12 @@ packages:
   '@bcoe/v8-coverage@1.0.2':
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
+
+  '@changesets/changelog-git@0.2.0':
+    resolution: {integrity: sha512-bHOx97iFI4OClIT35Lok3sJAwM31VbUM++gnMBV16fdbtBhgYu4dxsphBF/0AZZsyAHMrnM0yFcj5gZM1py6uQ==}
+
+  '@changesets/types@6.1.0':
+    resolution: {integrity: sha512-rKQcJ+o1nKNgeoYRHKOS07tAMNd3YSN0uHaJOZYjBAgxfV7TUE7JE+z4BzZdQwb5hKaYbayKN5KrYV7ODb2rAA==}
 
   '@clack/core@0.5.0':
     resolution: {integrity: sha512-p3y0FIOwaYRUPRcMO7+dlmLh8PSRcrjuTndsiA0WAFbWES0mLZlrjVoBRZ9DzkPFJZG6KGkJmoEAY0ZcVWTkow==}
@@ -9548,6 +9560,12 @@ snapshots:
       '@babel/helper-validator-identifier': 7.28.5
 
   '@bcoe/v8-coverage@1.0.2': {}
+
+  '@changesets/changelog-git@0.2.0':
+    dependencies:
+      '@changesets/types': 6.1.0
+
+  '@changesets/types@6.1.0': {}
 
   '@clack/core@0.5.0':
     dependencies:
