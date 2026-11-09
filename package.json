@@ -1,7 +1,7 @@
 {
   "name": "@asyncapi/cli",
   "description": "All in one CLI for all AsyncAPI tools",
-  "version": "6.2.2",
+  "version": "6.3.0",
   "author": "@asyncapi",
   "bin": {
     "asyncapi": "./bin/run_bin"
@@ -17,13 +17,13 @@
   ],
   "dependencies": {
     "@asyncapi/avro-schema-parser": "^3.1.0",
-    "@asyncapi/bundler": "^1.1.0",
+    "@asyncapi/bundler": "^1.1.1",
     "@asyncapi/converter": "^2.0.1",
-    "@asyncapi/diff": "^0.6.0",
+    "@asyncapi/diff": "^0.6.1",
     "@asyncapi/generator": "^3.2.0",
     "@asyncapi/modelina-cli": "^5.10.1",
     "@asyncapi/openapi-schema-parser": "^3.1.0",
-    "@asyncapi/optimizer": "^2.0.0",
+    "@asyncapi/optimizer": "^2.0.1",
     "@asyncapi/parser": "^3.6.2",
     "@asyncapi/problem": "^1.0.0",
     "@asyncapi/protobuf-schema-parser": "^3.8.3",
@@ -192,6 +192,7 @@
     "pack:tarballs:alpine": "oclif pack tarballs -t linux-x64 && npm run pack:rename alpine",
     "pack:windows": "oclif pack win && npm run pack:rename",
     "pack:rename": "node scripts/releasePackagesRename.js",
+    "pretarball": "node ./scripts/pretarball.js",
     "publish:trusted": "node scripts/publish-trusted.js",
     "prepublishOnly": "npm run build",
     "pretest": "npm run build",
